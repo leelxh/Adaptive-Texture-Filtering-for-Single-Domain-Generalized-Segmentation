@@ -1,0 +1,1 @@
+# Adaptive-Texture-Filtering-for-Single-Domain-Generalized-Segmentation
