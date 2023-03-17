@@ -142,7 +142,6 @@ sg_loss = cross_entropy2d
 boundary_loss = cross_entropy_loss2d
 
 upsample_256 = nn.Upsample(size=[640, 640], mode='bilinear')
-upsample_360 = nn.Upsample(size=[360, 640], mode='bilinear')
 upsample_512 = nn.Upsample(size=[512, 1024], mode='bilinear')
 
 i_iter_tmp = []
