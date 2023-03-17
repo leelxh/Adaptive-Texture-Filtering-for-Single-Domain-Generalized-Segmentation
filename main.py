@@ -21,7 +21,7 @@ from torch.autograd import Variable
 from tqdm import tqdm
 from torch.cuda.amp import GradScaler  
 from util.loader.CityLoader import CityLoader
-from util.loader.TextureLoaderHIPe import GTA5Loader
+from util.loader.Gta5Loader import GTA5Loader
 
 from util.loader.augmentations import Compose, BilateralFilter, RandomRotate, RandomHorizontallyFlip, RandomSized_and_Crop, RandomCrop
 from util.metrics import runningScore
@@ -49,9 +49,7 @@ parser.add_argument('--log_dir', type=str, default=LOG_DIR, help='the path to wh
 parser.add_argument('--gen_img_dir', type=str, default=GEN_IMG_DIR,
                     help='the path to where you save translated images and segmentation maps.')
 parser.add_argument('--gta5_data_path', type=str, default=GTA5_DATA_PATH, help='the path to GTA5 dataset.')
-parser.add_argument('--synthia_data_path', type=str, default=SYNTHIA_DATA_PATH, help='the path to SYNTHIA dataset.')
 parser.add_argument('--city_data_path', type=str, default=CITY_DATA_PATH, help='the path to Cityscapes dataset.')
-parser.add_argument('--data_list_path_synthia', type=str, default=DATA_LIST_PATH_SYNTHIA)
 parser.add_argument('--data_list_path_gta5', type=str, default=DATA_LIST_PATH_GTA5)
 parser.add_argument('--data_list_path_val_img', type=str, default=DATA_LIST_PATH_VAL_IMG)
 parser.add_argument('--data_list_path_val_lbl', type=str, default=DATA_LIST_PATH_VAL_LBL)
