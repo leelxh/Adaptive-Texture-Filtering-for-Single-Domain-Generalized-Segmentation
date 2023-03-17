@@ -14,5 +14,5 @@ Download the GTA5, SYNTHIA, Cityscapes, BDD-100K, Mapillary datasets.
 ## Training and test
 Run like this: python main.py --gta5_data_path /dataset/GTA5 --city_data_path /dataset/cityscapes --cuda_device_id 0  
 Notice:   
--Training first phase: load the model from model_firststage.py  
--Training second phase: load the model from model.py  
+-First phase training: load the model from model_firststage.py  
+-Second phase training: load the model from model.py  
