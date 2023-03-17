@@ -9,7 +9,6 @@ import cv2
 from torch.autograd import Variable
 from .model_util import *
 from .seg_model import DeeplabMulti
-from .HIPe import HIPePeeler, Guider
 from .HIPe import NAFNet
 from scipy.special import erfinv
 from scipy.ndimage.filters import gaussian_filter
@@ -78,29 +77,6 @@ class BasicBlock(nn.Sequential):
             m.append(act)
 
         super(BasicBlock, self).__init__(*m)
-
-
-class FuseModule(nn.Module):
-    def __init__(self, num_input, num_output, kernel_sz=None, stride=None, padding=None):
-        super(FuseModule, self).__init__()
-        self.conv3x3 = nn.Sequential(
-            nn.Conv2d(num_input, num_input, kernel_size=3, padding=1, bias=False),
-            nn.BatchNorm2d(num_input),
-            nn.ReLU(inplace=True)
-        )
-        self.conv = nn.Sequential(nn.Conv2d(num_input, num_output, 1),
-                                  nn.BatchNorm2d(num_output),
-                                  nn.ReLU())
-        self.conv3x3_1 = nn.Sequential(
-            nn.Conv2d(num_output, num_output, kernel_size=3, padding=1, bias=False),
-        )
-
-    def forward(self, x, y):
-        fuse = torch.cat((x, y), dim=1)
-        fuse = self.conv3x3(fuse)
-        fuse = self.conv(fuse)
-        fuse = self.conv3x3_1(fuse)
-        return fuse
 
 
 class BoundaryMapping5(nn.Module):
