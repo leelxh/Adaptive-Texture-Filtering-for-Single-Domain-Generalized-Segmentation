@@ -450,40 +450,6 @@ class SNR(nn.Module):
         return ff_plus
 
 
-class GenMap(nn.Module):
-    def __init__(self, num_input, kernel_sz=None, stride=None, padding=None):
-        super(GenMap, self).__init__()
-        self.conv3_1 = nn.Sequential(
-            nn.Conv2d(num_input, num_input // 2, kernel_size=3, padding=1, bias=False),
-            nn.BatchNorm2d(num_input // 2),
-            nn.ReLU(inplace=True),
-            nn.Conv2d(num_input // 2, num_input // 2, kernel_size=3, padding=1, bias=False),
-            nn.BatchNorm2d(num_input // 2),
-            nn.ReLU(inplace=True),
-            nn.Conv2d(num_input // 2, num_input, kernel_size=3, padding=1, bias=False)
-        )
-        self.pooling = nn.AdaptiveAvgPool2d(1)
-        self.fc1 = nn.Linear(num_input, num_input // 16, bias=True)
-
-        self.fc2 = nn.Linear(num_input // 16, num_input, bias=True)
-        self.relu = nn.ReLU()
-        self.sigmoid = nn.Sigmoid()
-
-    def forward(self, x):
-        batch_size, num_channels, H, W = x.size()
-        x = self.conv3_1(x)
-        x = self.pooling(x)
-        squeeze_tensor = x.view(batch_size, num_channels, -1).mean(dim=2)
- 
-        fc_out_1 = self.relu(self.fc1(squeeze_tensor))
-        fc_out_2 = self.sigmoid(self.fc2(fc_out_1))
-
-        a, b = squeeze_tensor.size()
-        output_tensor = fc_out_2.view(a, b, 1, 1)
-
-        return output_tensor
-
-
 class Resize(nn.Module):
     def __init__(self, a, b, c, d):
         super(Resize, self).__init__()
@@ -598,7 +564,6 @@ class SharedEncoder(nn.Module):
 
         if aux is not None:
             x_rest = x_rest * 2 - 1
-            # x_rest = (x_rest + 1) / 2
             return x_x, x_rest, x3, x4
         else:
             return x_x, x3, x4
