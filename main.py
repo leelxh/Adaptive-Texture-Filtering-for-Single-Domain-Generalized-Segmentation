@@ -26,7 +26,7 @@ from util.loader.TextureLoaderHIPe import GTA5Loader
 from util.loader.augmentations import Compose, BilateralFilter, RandomRotate, RandomHorizontallyFlip, RandomSized_and_Crop, RandomCrop
 from util.metrics import runningScore
 from util.loss_fp16 import VGGLoss, VGGLoss_for_trans, cross_entropy2d, cross_entropy_loss2d
-from model.model_edge_n import SharedEncoder
+from model.model import SharedEncoder
 from util.utils import poly_lr_scheduler, adjust_learning_rate, save_models, load_models
 
 # Data-related
