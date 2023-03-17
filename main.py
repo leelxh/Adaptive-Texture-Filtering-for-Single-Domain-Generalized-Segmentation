@@ -177,7 +177,7 @@ for i_iter in range(num_steps):
     slabelv = Variable(source_label).cuda()
     sboundary_gt = Variable(sboundary).cuda()
    
-    tdatav, tdatav_rest, s_pred1, s_pred2, s_boundary, _, _, _, _ = enc_shared(image_data, image_data)
+    tdatav, tdatav_rest, s_pred1, s_pred2, s_boundary = enc_shared(image_data, image_data)
 
     s_pred1 = upsample_256(s_pred1)
     s_pred2 = upsample_256(s_pred2)
