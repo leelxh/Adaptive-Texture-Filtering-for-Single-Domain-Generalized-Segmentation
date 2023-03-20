@@ -1,0 +1,1 @@
+from .smoothing_nafnet import NAFNet
