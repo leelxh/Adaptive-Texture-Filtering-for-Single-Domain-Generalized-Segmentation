@@ -9,7 +9,7 @@ import cv2
 from torch.autograd import Variable
 from .model_util import *
 from .seg_model import DeeplabMulti
-from .HIPe import NAFNet
+from .smoother import NAFNet
 from scipy.special import erfinv
 from scipy.ndimage.filters import gaussian_filter
 from math import sqrt
