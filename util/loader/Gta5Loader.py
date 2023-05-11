@@ -97,9 +97,9 @@ class GTA5Loader(data.Dataset):
 			label_p = 1.0* label_time/np.sum(label_time)
 			pass_c, pass_t = np.unique(label_p>0.02, return_counts=True)
                   
-      boundary_gt = label_copy.astype(np.uint8)
-      boundary_gt = (find_boundaries(boundary_gt, mode='inner')).astype(np.uint8)
-      boundary_gt = torch.from_numpy(boundary_gt).unsqueeze(0).float()
+      			boundary_gt = label_copy.astype(np.uint8)
+      			boundary_gt = (find_boundaries(boundary_gt, mode='inner')).astype(np.uint8)
+      			boundary_gt = torch.from_numpy(boundary_gt).unsqueeze(0).float()
             
 			if pass_c[-1] == True:
 				if pass_t[-1] >= 3:
